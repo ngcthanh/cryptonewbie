@@ -3,476 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng Dẫn Đăng Ký Binance Từ A-Z</title>
+    <title>Tư vấn Tuyển sinh Đại học Sài Gòn - SGU & Dialogflow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        .chart-container {
-            position: relative;
+        body { font-family: 'Inter', sans-serif; }
+        .custom-card { transition: all 0.3s ease; }
+        .custom-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); 
+            border-color: #3b82f6;
+        }
+        /* Style cho container chứa iframe chatbot */
+        .chatbot-iframe-container {
             width: 100%;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 250px;
-            max-height: 300px;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            border: 8px solid white;
         }
-        @media (min-width: 768px) {
-            .chart-container { height: 300px; }
-        }
-        .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .step-btn.active {
-            background-color: #FCD535;
-            color: #0f172a;
-            border-color: #FCD535;
-            transform: scale(1.02);
-            box-shadow: 0 10px 15px -3px rgba(252, 213, 53, 0.3);
-        }
-        .rule-card {
-            transition: all 0.3s ease;
-        }
-        .rule-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        iframe {
+            display: block;
+            border: none;
         }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 antialiased selection:bg-yellow-300 selection:text-slate-900">
+<body class="bg-slate-50 text-slate-900">
 
-    <!-- Chosen Palette: Slate (neutral/dark tech theme: slate-50 to slate-900) combined with Binance Yellow (#FCD535) for high-contrast, trustworthy brand accents. -->
-    <!-- Application Structure Plan: The SPA is structured as an interactive "Mission Control" dashboard. It abandons the static top-to-bottom article format for a dynamic, non-linear exploration model. Section 1 (Preparation) uses interactive toggles to ensure readiness. Section 2 (The Core Guide) utilizes a master-detail split layout: a sticky sidebar tracks progress via a dynamic Doughnut chart and step buttons, while the main view updates with detailed instructions. Section 3 (Golden Rules) acts as a concluding summary. This structure was chosen because account registration is a multi-step process; isolating each step reduces cognitive load and gamifying progress encourages completion. -->
-    <!-- Visualization & Content Choices: Report Info: 5-step registration process and security levels -> Goal: Change & Organize -> Viz: Doughnut Chart (Chart.js) acting as a progress meter -> Interaction: User clicks steps -> Justification: A progress chart visually reinforces that completing KYC and 2FA drastically improves account safety from 0% to 100%, turning a boring checklist into an engaging achievement tracker. No SVG used. Unicode emojis replace standard icons. -> Library/Method: Chart.js Canvas, Tailwind CSS. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <header class="bg-slate-900 text-white pt-20 pb-24 px-4 rounded-b-[3rem] shadow-2xl relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#FCD535 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-block bg-yellow-400 text-slate-900 font-bold px-4 py-1.5 rounded-full text-sm mb-6 uppercase tracking-wider shadow-sm">
-                Cẩm Nang Người Mới
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Làm Chủ Tài Khoản <span class="text-yellow-400">Binance</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Binance hiện đang là sàn giao dịch tiền điện tử (Crypto) lớn nhất và uy tín nhất thế giới. Ứng dụng tương tác này sẽ hướng dẫn bạn từ lúc chuẩn bị đến khi sở hữu một tài khoản bảo mật 100%.
-            </p>
-            <button onclick="document.getElementById('prep-section').scrollIntoView({behavior: 'smooth'})" class="inline-flex items-center justify-center bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold text-lg py-4 px-10 rounded-full transition-transform hover:scale-105 shadow-xl shadow-yellow-400/20">
-                BẮT ĐẦU HÀNH TRÌNH 🚀
-            </button>
+<nav class="bg-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="bg-white p-1 rounded-full text-blue-800 font-bold text-xl w-10 h-10 flex items-center justify-center shadow-md">SGU</div>
+            <span class="font-bold text-lg hidden md:block uppercase tracking-tight">Đại học Sài Gòn - AI Assistant</span>
         </div>
-    </header>
+        <div class="flex space-x-6 text-sm font-medium">
+            <a href="#" class="hover:text-blue-200 transition">Trang chủ</a>
+            <a href="#guide-section" class="hover:text-blue-200 transition">Hướng dẫn</a>
+            <a href="#stats-section" class="hover:text-blue-200 transition">Số liệu</a>
+        </div>
+    </div>
+</nav>
 
-    <main class="max-w-7xl mx-auto px-4 pb-24 space-y-16 -mt-8 relative z-20">
+<main class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-12 gap-8">
+    
+    <!-- Cột trái: Thống kê chỉ tiêu -->
+    <div class="lg:col-span-4 space-y-6">
+        <section id="stats-section" class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+            <h2 class="text-xl font-bold mb-2 flex items-center gap-2 text-blue-800">
+                📊 Chỉ tiêu 2024
+            </h2>
+            <p class="text-xs text-slate-500 mb-8">Phân bổ chỉ tiêu dự kiến theo phương thức xét tuyển.</p>
+            <div class="relative h-64 w-full">
+                <canvas id="admissionChart"></canvas>
+            </div>
+            <div class="mt-8 space-y-3">
+                <div class="p-3 bg-slate-50 rounded-xl flex justify-between items-center border border-slate-100">
+                    <span class="text-sm font-medium">Thi tốt nghiệp THPT</span>
+                    <span class="text-blue-700 font-bold">70%</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl flex justify-between items-center border border-slate-100">
+                    <span class="text-sm font-medium">Xét học bạ THPT</span>
+                    <span class="text-blue-500 font-bold">15%</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl flex justify-between items-center border border-slate-100">
+                    <span class="text-sm font-medium">Kết quả ĐGNL</span>
+                    <span class="text-blue-400 font-bold">15%</span>
+                </div>
+            </div>
+        </section>
 
-        <section id="prep-section" class="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 md:p-12">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold mb-4 text-slate-900">Khâu Chuẩn Bị Bắt Buộc</h2>
-                    <p class="text-slate-600 text-lg">
-                        Phần này giúp bạn rà soát các công cụ cần thiết trước khi đăng ký. Quá trình tạo tài khoản và xác minh danh tính sẽ bị gián đoạn nếu thiếu các tài liệu này. Hãy click vào từng mục để đánh dấu hoàn tất.
-                    </p>
+        <section class="bg-gradient-to-br from-blue-900 to-blue-700 text-white p-8 rounded-3xl shadow-xl">
+            <h3 class="font-bold text-lg mb-4">Liên hệ hỗ trợ</h3>
+            <p class="text-blue-100 text-sm mb-6 leading-relaxed">Nếu cần tư vấn chuyên sâu hơn, bạn có thể liên hệ trực tiếp với chúng tôi qua hotline.</p>
+            <div class="space-y-4 text-sm">
+                <div class="flex items-start gap-4">
+                    <span class="bg-blue-800/50 p-2 rounded-lg">📍</span>
+                    <span>273 An Dương Vương, Q.5, TP.HCM</span>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="bg-blue-800/50 p-2 rounded-lg">📞</span>
+                    <span>(028) 38352309</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Cột phải: Hướng dẫn và Tương tác -->
+    <div class="lg:col-span-8 space-y-8">
+        
+        <!-- Header Section -->
+        <header class="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 leading-tight">
+                    Tư vấn Tuyển sinh <br><span class="text-blue-700">Tự động bằng AI</span>
+                </h1>
+                <p class="text-slate-600 text-lg max-w-xl leading-relaxed">
+                    Hệ thống đã nhúng trực tiếp khung hội thoại Dialogflow bên dưới để bạn dễ dàng trao đổi.
+                </p>
+                <div id="status-tag" class="mt-6 flex items-center gap-2 text-green-700 text-sm font-bold bg-green-50 w-fit px-4 py-2 rounded-full">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Hệ thống AI đang trực tuyến
+                </div>
+            </div>
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-50 rounded-full opacity-50"></div>
+        </header>
+
+        <!-- Chủ đề phổ biến -->
+        <section id="guide-section">
+            <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+                💡 Chủ đề phổ biến
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4 mb-10">
+                <div class="custom-card bg-white p-6 rounded-2xl border border-slate-100">
+                    <div class="text-2xl mb-3">📝</div>
+                    <h4 class="font-bold mb-1">Xét học bạ</h4>
+                    <p class="text-slate-500 text-sm">Hướng dẫn quy trình và điều kiện nộp hồ sơ xét học bạ.</p>
+                </div>
+                <div class="custom-card bg-white p-6 rounded-2xl border border-slate-100">
+                    <div class="text-2xl mb-3">🎓</div>
+                    <h4 class="font-bold mb-1">Ngành Sư phạm</h4>
+                    <p class="text-slate-500 text-sm">Chính sách hỗ trợ học phí theo Nghị định 116.</p>
+                </div>
+            </div>
+
+            <!-- NHÚNG CHATBOT DIALOGFLOW TẠI ĐÂY -->
+            <div class="space-y-6">
+                <div class="text-center">
+                    <h3 class="font-bold text-xl mb-2">💬 Trò chuyện với SGU-Bot</h3>
+                    <p class="text-slate-500 text-sm mb-6">Bạn có thể đặt câu hỏi trực tiếp vào khung dưới đây</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-6" id="checklist">
-                    <div class="flex flex-col items-center text-center p-6 rounded-2xl border-2 border-slate-100 bg-slate-50 cursor-pointer transition-all hover:border-yellow-300 hover:bg-yellow-50" onclick="togglePrep(this)">
-                        <div class="text-4xl mb-4 prep-icon grayscale opacity-50 transition-all">📧</div>
-                        <h3 class="font-bold text-lg mb-2">Thông tin liên lạc</h3>
-                        <p class="text-sm text-slate-500">Địa chỉ Email hoặc Số điện thoại đang sử dụng thực tế.</p>
-                        <div class="mt-4 w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center text-transparent prep-check transition-all">✓</div>
-                    </div>
-                    
-                    <div class="flex flex-col items-center text-center p-6 rounded-2xl border-2 border-slate-100 bg-slate-50 cursor-pointer transition-all hover:border-yellow-300 hover:bg-yellow-50" onclick="togglePrep(this)">
-                        <div class="text-4xl mb-4 prep-icon grayscale opacity-50 transition-all">🪪</div>
-                        <h3 class="font-bold text-lg mb-2">Giấy tờ tùy thân</h3>
-                        <p class="text-sm text-slate-500">CCCD, CMND hoặc Hộ chiếu bản gốc, thông tin rõ nét.</p>
-                        <div class="mt-4 w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center text-transparent prep-check transition-all">✓</div>
-                    </div>
-
-                    <div class="flex flex-col items-center text-center p-6 rounded-2xl border-2 border-slate-100 bg-slate-50 cursor-pointer transition-all hover:border-yellow-300 hover:bg-yellow-50" onclick="togglePrep(this)">
-                        <div class="text-4xl mb-4 prep-icon grayscale opacity-50 transition-all">📱</div>
-                        <h3 class="font-bold text-lg mb-2">Điện thoại</h3>
-                        <p class="text-sm text-slate-500">Smartphone có camera tốt để chụp ảnh giấy tờ và quét khuôn mặt.</p>
-                        <div class="mt-4 w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center text-transparent prep-check transition-all">✓</div>
-                    </div>
+                <div class="chatbot-iframe-container">
+                    <iframe
+    allow="microphone;"
+    width="350"
+    height="430"
+    src="https://console.dialogflow.com/api-client/demo/embedded/b2e87f1f-839e-462c-aba4-697c18c8ea1b">
+</iframe>
                 </div>
             </div>
         </section>
+    </div>
+</main>
 
-        <section id="mission-control" class="pt-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl font-bold mb-4 text-slate-900">Bảng Điều Khiển Đăng Ký</h2>
-                <p class="text-slate-600 text-lg">
-                    Đây là khu vực tương tác chính yếu. Biểu đồ bên trái đo lường mức độ hoàn thiện và bảo mật tài khoản của bạn. Hãy nhấn vào các bước từ 1 đến 5 để xem hướng dẫn chi tiết và quan sát sự gia tăng của chỉ số bảo mật.
-                </p>
-            </div>
+<footer class="bg-white border-t py-12 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold mb-2">Trường Đại học Sài Gòn</p>
+        <p class="text-slate-500 text-sm">Hệ thống tư vấn tự động phục vụ kỳ tuyển sinh 2024</p>
+    </div>
+</footer>
 
-            <div class="grid lg:grid-cols-12 gap-8 items-start">
-                
-                <div class="lg:col-span-4 bg-white rounded-3xl shadow-lg border border-slate-100 p-8 sticky top-6">
-                    <h3 class="font-bold text-slate-900 text-xl text-center mb-2">Chỉ Số Bảo Mật</h3>
-                    <p class="text-sm text-slate-500 text-center mb-6">Mục tiêu: 100% An Toàn</p>
-                    
-                    <div class="chart-container">
-                        <canvas id="progressChart"></canvas>
-                    </div>
-                    
-                    <div class="mt-4 text-center">
-                        <div class="text-5xl font-black text-slate-900 tracking-tighter" id="progress-val">0%</div>
-                        <div class="text-sm font-bold uppercase tracking-wider mt-2 text-yellow-600 bg-yellow-50 py-1 px-3 rounded-md inline-block" id="progress-label">Chưa kích hoạt</div>
-                    </div>
-
-                    <div class="mt-10 space-y-3" id="step-nav">
-                    </div>
-                </div>
-
-                <div class="lg:col-span-8">
-                    <div id="step-content-container" class="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 md:p-12 min-h-[500px]">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="golden-rules" class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl font-bold mb-4 text-yellow-400">🎉 Chúc mừng bạn đã hoàn tất!</h2>
-                <p class="text-slate-300 text-lg">
-                    Khi hoàn thành 5 bước trên, bạn đã sở hữu một tài khoản Binance an toàn. Trước khi nạp tiền và thực hiện giao dịch mua bán Bitcoin hoặc Altcoin đầu tiên, hãy ghi nhớ các lời khuyên sống còn này.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="rule-card bg-slate-800 border border-slate-700 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500 rounded-bl-full opacity-10"></div>
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="font-bold text-xl mb-3 text-white">Vốn Nhỏ Bắt Đầu</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Hãy bắt đầu với một số vốn nhỏ mà bạn có thể chấp nhận rủi ro. Thị trường Crypto biến động rất mạnh, việc làm quen thao tác là ưu tiên hàng đầu.
-                    </p>
-                </div>
-
-                <div class="rule-card bg-slate-800 border border-slate-700 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500 rounded-bl-full opacity-10"></div>
-                    <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="font-bold text-xl mb-3 text-white">Luôn Luôn DYOR</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Do Your Own Research (Tự nghiên cứu). Luôn tự tìm hiểu kỹ lưỡng trước khi mua bất kỳ đồng coin nào thay vì nghe theo lời khuyên của người khác.
-                    </p>
-                </div>
-
-                <div class="rule-card bg-slate-800 border border-slate-700 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-red-500 rounded-bl-full opacity-10"></div>
-                    <div class="text-4xl mb-4">🔐</div>
-                    <h3 class="font-bold text-xl mb-3 text-white">Bảo Mật Tuyệt Đối</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Không bao giờ đưa mật khẩu hay mã OTP cho bất kỳ ai khác. Binance sẽ không bao giờ chủ động nhắn tin yêu cầu bạn cung cấp các thông tin này.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center">
-                <a href="https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=vi&ref=GRO_28502_H8HLV&utm_source=default" target="_blank" rel="noopener noreferrer" class="inline-block bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold text-xl py-5 px-12 rounded-full transition-transform hover:-translate-y-1 shadow-2xl">
-                    👉 TRUY CẬP BINANCE & BẮT ĐẦU NGAY 👈
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <script>
-        const appState = {
-            currentStep: 0,
-            chartObj: null
-        };
-
-        const stepsData = [
-            {
-                title: "1. Truy cập đăng ký",
-                icon: "🚀",
-                progress: 10,
-                status: "BƯỚC ĐẦU TIÊN",
-                html: `
-                    <div class="fade-in">
-                        <div class="text-6xl mb-6">🔗</div>
-                        <h3 class="text-3xl font-extrabold text-slate-900 mb-6">Truy cập trang đăng ký chính thức</h3>
-                        <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                            Để nhận được các ưu đãi dành cho người dùng mới và giảm phí giao dịch, hãy truy cập vào liên kết đăng ký đối tác chính thức dưới đây.
-                        </p>
-                        <div class="bg-yellow-50 p-8 rounded-2xl border border-yellow-200 text-center shadow-inner">
-                            <a href="https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=vi&ref=GRO_28502_H8HLV&utm_source=default" target="_blank" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg text-lg transform hover:-translate-y-1 w-full md:w-auto">
-                                ĐĂNG KÝ TÀI KHOẢN TẠI ĐÂY
-                            </a>
-                            <p class="text-sm text-slate-500 mt-6 italic">
-                                *Lưu ý: Việc đăng ký qua link giới thiệu trên sẽ giúp bạn nhận được các phần thưởng độc quyền từ chương trình "Refer2Earn" của Binance.
-                            </p>
-                        </div>
-                    </div>
-                `
+<script>
+    // Khởi tạo biểu đồ
+    function initChart() {
+        const ctx = document.getElementById('admissionChart');
+        if (!ctx) return;
+        new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Thi tốt nghiệp', 'Học bạ', 'ĐGNL'],
+                datasets: [{
+                    data: [70, 15, 15],
+                    backgroundColor: ['#1e40af', '#3b82f6', '#93c5fd'],
+                    borderWidth: 4,
+                    borderColor: '#ffffff',
+                    hoverOffset: 12
+                }]
             },
-            {
-                title: "2. Điền thông tin",
-                icon: "📝",
-                progress: 30,
-                status: "TẠO HỒ SƠ",
-                html: `
-                    <div class="fade-in">
-                        <div class="text-6xl mb-6">📝</div>
-                        <h3 class="text-3xl font-extrabold text-slate-900 mb-8">Điền thông tin tạo tài khoản</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <div class="bg-slate-900 text-yellow-400 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-0.5">1</div>
-                                <p class="text-slate-700 text-lg">Sau khi bấm vào link trên, chọn <strong>"Đăng ký bằng Email/Số điện thoại"</strong> (Sign up with Email or Phone).</p>
-                            </div>
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <div class="bg-slate-900 text-yellow-400 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-0.5">2</div>
-                                <p class="text-slate-700 text-lg">Nhập <strong>Email</strong> hoặc <strong>Số điện thoại</strong> của bạn.</p>
-                            </div>
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <div class="bg-slate-900 text-yellow-400 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-0.5">3</div>
-                                <p class="text-slate-700 text-lg">Tạo <strong>Mật khẩu</strong> (Password): Mật khẩu cần mạnh, tối thiểu 8 ký tự, bao gồm ít nhất 1 chữ IN HOA và 1 chữ số.</p>
-                            </div>
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <div class="bg-slate-900 text-yellow-400 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-0.5">4</div>
-                                <p class="text-slate-700 text-lg">Đánh dấu tích vào ô đồng ý với các Điều khoản dịch vụ và Chính sách quyền riêng tư của Binance, sau đó bấm <strong>"Tạo tài khoản cá nhân"</strong>.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                title: "3. Xác minh liên lạc",
-                icon: "📩",
-                progress: 50,
-                status: "XÁC MINH CƠ BẢN",
-                html: `
-                    <div class="fade-in">
-                        <div class="text-6xl mb-6">📩</div>
-                        <h3 class="text-3xl font-extrabold text-slate-900 mb-6">Xác minh Email / Số điện thoại</h3>
-                        <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                            Bước này để xác nhận thông tin liên lạc là của bạn và hoàn tất việc tạo tài khoản cơ bản.
-                        </p>
-                        
-                        <div class="border-l-4 border-yellow-400 pl-6 space-y-8 py-2">
-                            <div class="relative">
-                                <div class="absolute -left-10 bg-white w-6 h-6 rounded-full border-4 border-yellow-400"></div>
-                                <h4 class="font-bold text-xl text-slate-900 mb-2">Nhận mã OTP</h4>
-                                <p class="text-slate-600">Hệ thống Binance sẽ gửi một mã xác nhận (OTP) gồm 6 chữ số về Email hoặc Số điện thoại mà bạn vừa đăng ký.</p>
-                            </div>
-                            <div class="relative">
-                                <div class="absolute -left-10 bg-white w-6 h-6 rounded-full border-4 border-yellow-400"></div>
-                                <h4 class="font-bold text-xl text-slate-900 mb-2">Nhập mã</h4>
-                                <p class="text-slate-600">Mở hộp thư đến (hoặc tin nhắn SMS), copy mã OTP và dán vào ô xác nhận trên màn hình Binance.</p>
-                            </div>
-                            <div class="relative">
-                                <div class="absolute -left-10 bg-yellow-400 w-6 h-6 rounded-full border-4 border-yellow-400 shadow-[0_0_10px_rgba(252,213,53,0.8)]"></div>
-                                <h4 class="font-bold text-xl text-slate-900 mb-2">Hoàn tất tạo tài khoản</h4>
-                                <p class="text-slate-600">Bấm <strong>"Gửi"</strong>. Vậy là bạn đã tạo tài khoản thành công!</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                title: "4. Định danh (KYC)",
-                icon: "📸",
-                progress: 75,
-                status: "MỞ KHÓA GIAO DỊCH",
-                html: `
-                    <div class="fade-in">
-                        <div class="text-6xl mb-6">📸</div>
-                        <h3 class="text-3xl font-extrabold text-slate-900 mb-4">Xác minh danh tính (KYC) - <span class="text-red-500">Bắt buộc</span></h3>
-                        <p class="text-slate-600 text-lg mb-8 bg-slate-100 p-4 rounded-lg font-medium">
-                            Để có thể nạp tiền, rút tiền và giao dịch, bạn bắt buộc phải Xác minh danh tính. Quá trình xét duyệt thường chỉ mất 5-15 phút.
-                        </p>
-
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
-                                <h4 class="font-bold text-slate-900 mb-4 uppercase text-sm tracking-wider">Thông tin cá nhân</h4>
-                                <ul class="space-y-3 text-slate-600">
-                                    <li>👉 Bấm <strong>"Xác minh ngay"</strong> (Verify Now) sau khi đăng ký.</li>
-                                    <li>👉 Chọn quốc gia cư trú là <strong>Việt Nam</strong>.</li>
-                                    <li>👉 Nhập chính xác Họ tên, Ngày tháng năm sinh (phải khớp với giấy tờ).</li>
-                                    <li>👉 Chọn loại giấy tờ (Khuyên dùng <strong>CCCD</strong>).</li>
-                                </ul>
-                            </div>
-                            <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-lg">
-                                <h4 class="font-bold text-yellow-400 mb-4 uppercase text-sm tracking-wider">Thao tác chụp</h4>
-                                <ul class="space-y-4 text-slate-300 text-sm">
-                                    <li class="border-b border-slate-700 pb-3">
-                                        <strong class="text-white">Chụp Giấy Tờ:</strong> Chụp mặt trước và mặt sau. Đảm bảo ảnh rõ nét, không lóa sáng hay mất góc.
-                                    </li>
-                                    <li>
-                                        <strong class="text-white">Xác minh khuôn mặt (Selfie):</strong> Đưa camera trước lên ngang mặt, làm theo hướng dẫn (gật đầu, chớp mắt). <br>
-                                        <span class="text-yellow-400/80 text-xs italic mt-1 block">*Không đội mũ, không đeo kính râm, đủ sáng.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                title: "5. Bảo mật 2 lớp (2FA)",
-                icon: "🛡️",
-                progress: 100,
-                status: "BẢO VỆ TỐI ĐA",
-                html: `
-                    <div class="fade-in">
-                        <div class="text-6xl mb-6">🛡️</div>
-                        <h3 class="text-3xl font-extrabold text-slate-900 mb-4">Bật bảo mật 2 lớp (2FA)</h3>
-                        <p class="text-red-700 text-lg mb-8 bg-red-50 p-4 rounded-lg font-bold border border-red-100">
-                            Đây là bước cực kỳ quan trọng giúp tài khoản của bạn an toàn trước hacker. Bắt buộc nên thực hiện!
-                        </p>
-
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-                                <div class="bg-slate-100 text-slate-500 w-10 h-10 rounded-xl flex items-center justify-center font-bold flex-shrink-0 text-lg">1</div>
-                                <p class="text-slate-700 text-lg">Tại màn hình chính của Binance, vào mục <strong>Hồ sơ (Profile)</strong> > Chọn <strong>Bảo mật (Security)</strong>.</p>
-                            </div>
-                            <div class="flex items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-                                <div class="bg-slate-100 text-slate-500 w-10 h-10 rounded-xl flex items-center justify-center font-bold flex-shrink-0 text-lg">2</div>
-                                <p class="text-slate-700 text-lg">Khuyến nghị bật <strong>Ứng dụng xác thực (Authenticator App)</strong>.</p>
-                            </div>
-                            <div class="flex items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-                                <div class="bg-slate-100 text-slate-500 w-10 h-10 rounded-xl flex items-center justify-center font-bold flex-shrink-0 text-lg">3</div>
-                                <p class="text-slate-700 text-lg">Tải <strong>Google Authenticator</strong>. Quét mã QR do Binance cung cấp (hoặc copy dãy số) và dán vào ứng dụng.</p>
-                            </div>
-                            <div class="flex items-start gap-4 bg-green-50 p-5 rounded-2xl border border-green-200 shadow-sm">
-                                <div class="bg-green-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold flex-shrink-0 text-lg mt-1">✓</div>
-                                <div>
-                                    <p class="text-green-900 text-lg font-bold mb-1">Nhập mã gồm 6 số từ ứng dụng vào Binance để hoàn tất.</p>
-                                    <p class="text-sm text-green-700 italic">Lưu ý sinh tử: Nhớ lưu lại đoạn mã dự phòng (Backup Key) ra giấy và cất ở nơi an toàn.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
-        ];
-
-        function togglePrep(el) {
-            const icon = el.querySelector('.prep-icon');
-            const check = el.querySelector('.prep-check');
-            
-            if (el.classList.contains('border-yellow-300')) {
-                el.classList.remove('border-yellow-300', 'bg-yellow-50');
-                el.classList.add('border-slate-100', 'bg-slate-50');
-                icon.classList.add('grayscale', 'opacity-50');
-                check.classList.remove('bg-green-500', 'border-green-500', 'text-white');
-                check.classList.add('border-slate-300', 'text-transparent');
-            } else {
-                el.classList.add('border-yellow-300', 'bg-yellow-50');
-                el.classList.remove('border-slate-100', 'bg-slate-50');
-                icon.classList.remove('grayscale', 'opacity-50');
-                check.classList.add('bg-green-500', 'border-green-500', 'text-white');
-                check.classList.remove('border-slate-300', 'text-transparent');
-            }
-        }
-
-        function initApp() {
-            const ctx = document.getElementById('progressChart').getContext('2d');
-            appState.chartObj = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Bảo Mật', 'Chưa Hoàn Thành'],
-                    datasets: [{
-                        data: [0, 100],
-                        backgroundColor: ['#FCD535', '#f1f5f9'],
-                        borderWidth: 0,
-                        hoverOffset: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '85%',
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false }
-                    },
-                    animation: {
-                        animateScale: false,
-                        animateRotate: true,
-                        duration: 1000,
-                        easing: 'easeOutQuart'
+            options: {
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { size: 12, family: 'Inter' }
+                        }
                     }
                 }
-            });
-
-            renderNavigation();
-            loadStep(0);
-        }
-
-        function renderNavigation() {
-            const navContainer = document.getElementById('step-nav');
-            let html = '';
-            stepsData.forEach((step, index) => {
-                html += `
-                    <button onclick="loadStep(${index})" id="nav-btn-${index}" class="step-btn w-full text-left px-5 py-3.5 rounded-xl border border-slate-200 text-slate-600 font-medium transition-all flex items-center justify-between hover:bg-slate-50">
-                        <span class="flex items-center gap-3">
-                            <span class="text-xl">${step.icon}</span> 
-                            <span>${step.title}</span>
-                        </span>
-                        <span class="text-xs font-bold opacity-50 hidden md:block">${step.progress}%</span>
-                    </button>
-                `;
-            });
-            navContainer.innerHTML = html;
-        }
-
-        function loadStep(index) {
-            appState.currentStep = index;
-            const step = stepsData[index];
-
-            document.querySelectorAll('.step-btn').forEach((btn, i) => {
-                if(i === index) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-
-            const contentContainer = document.getElementById('step-content-container');
-            contentContainer.innerHTML = step.html;
-
-            updateChart(step.progress, step.status);
-        }
-
-        function updateChart(targetProgress, statusText) {
-            if (!appState.chartObj) return;
-
-            let color = '#FCD535';
-            if (targetProgress === 100) color = '#10b981'; 
-
-            appState.chartObj.data.datasets[0].data = [targetProgress, 100 - targetProgress];
-            appState.chartObj.data.datasets[0].backgroundColor = [color, '#f1f5f9'];
-            appState.chartObj.update();
-
-            const valEl = document.getElementById('progress-val');
-            let currentVal = parseInt(valEl.innerText) || 0;
-            const increment = targetProgress > currentVal ? 1 : -1;
-            
-            const timer = setInterval(() => {
-                if (currentVal === targetProgress) {
-                    clearInterval(timer);
-                    valEl.style.color = targetProgress === 100 ? '#10b981' : '#0f172a';
-                } else {
-                    currentVal += increment;
-                    valEl.innerText = currentVal + '%';
-                }
-            }, 10);
-
-            const labelEl = document.getElementById('progress-label');
-            labelEl.innerText = statusText;
-            if (targetProgress === 100) {
-                labelEl.className = "text-sm font-bold uppercase tracking-wider mt-2 text-green-700 bg-green-100 py-1.5 px-4 rounded-md inline-block transition-colors";
-            } else {
-                labelEl.className = "text-sm font-bold uppercase tracking-wider mt-2 text-yellow-700 bg-yellow-100 py-1.5 px-4 rounded-md inline-block transition-colors";
             }
-        }
+        });
+    }
 
-        window.onload = initApp;
-    </script>
+    window.onload = initChart;
+</script>
+
 </body>
 </html>
